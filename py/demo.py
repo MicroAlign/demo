@@ -4,6 +4,7 @@ import sys
 
 FIBER_NUMBER = 2
 
+
 class TestMac(unittest.TestCase):
     serial_name = ""
 
@@ -78,7 +79,7 @@ class TestMac(unittest.TestCase):
 
 if __name__ == "__main__":
     if (len(sys.argv) < 2):
-        print("Please specify serial port/device.")
-        exit()
+        print("FATAL ERROR: Please specify serial port/device.")
+        sys.exit()
     TestMac.serial_name = sys.argv.pop()
     unittest.main()

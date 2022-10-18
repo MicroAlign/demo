@@ -5,4 +5,4 @@ The Python module `mac.py` is a wrapper to `MAMS`'s serial API. Examples on how 
 ```bash
 python py/demo.py <SERIAL_PORT>
 ```
-where `<SERIAL_PORT>` is the USB port name used to connect with the MicroAlign device (e.g. `COM...` on Windows, `/dev/ttyUSB...` on Linux, `/dev/cu.usbserial-...` on MacOS)
+where `<SERIAL_PORT>` is the USB port name connected to MicroAlign device (e.g. `COM...` on Windows, `/dev/ttyUSB...` on Linux, `/dev/cu.usbserial-...` on MacOS)

@@ -44,9 +44,9 @@ class Messenger:
 
 
 class Fiber:
-    __MAX_X = 6.00001
-    __MAX_Y = 4.00001
-    __TANGENT_ALPHA = 0.66666666667
+    __MAX_X = 11.00001
+    __MAX_Y = 20.00001
+    __TANGENT_ALPHA = __MAX_Y / __MAX_X
     __MAX_BIAS = 4095
     __HALF_BIAS = __MAX_BIAS / 2.0
     __SCALE_X = __MAX_X / __MAX_BIAS * 2.0 * __TANGENT_ALPHA
