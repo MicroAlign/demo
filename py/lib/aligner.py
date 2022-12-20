@@ -11,20 +11,20 @@ except Exception as exception:
 
 
 class Aligner:
-    __number_of_fibers = 8
-
     def __init__(
             self,
             serial_device,
+            number_of_fibers,
             number_of_steps,
             number_of_samples,
             min_step_bits,
     ):
         self.__serial_obj = Serial(serial_device, 115200)
-        self.__serial_obj.timeout = 1
+        self.__serial_obj.timeout = 10
         self.__number_of_steps = number_of_steps
         self.__number_of_samples = number_of_samples
         self.__min_step_bits = min_step_bits
+        self.__number_of_fibers = number_of_fibers
         self.__coupling_vec = [
             [0 for i in range(number_of_steps)] for j in range(self.__number_of_fibers)]
         self.__bias_left_vec = [

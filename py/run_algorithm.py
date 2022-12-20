@@ -12,19 +12,22 @@ import math
 from lib.aligner import Aligner
 
 # Number of steps that the algorithm has to perform
-number_of_steps = 100
+number_of_steps = 140
 # Number of samples for each power measurement over which min, max, and
 # average are computed
 number_of_samples = 5
-# 2^number_of_bits is the minimum step size
+# 2^min_step_bits is the minimum step size
 min_step_bits = 5  # 0-7
 # USB device (Use COMx for Windows)
 usb_device = "/dev/cu.usbserial-AB0NQ3DC"
 
 ########################################
+# NOTE: Do not change NUM_OF_FIBERS - it's hardware dependent.
+NUM_OF_FIBERS = 8
 # Initialize Aligner
 algr = Aligner(
     usb_device,
+    NUM_OF_FIBERS,
     number_of_steps,
     number_of_samples,
     min_step_bits,
@@ -47,11 +50,11 @@ bias_left_vec = algr.get_bias_left_vec()
 bias_right_vec = algr.get_bias_right_vec()
 
 normalized_coupling_vec = [[math.log10((coupling_vec[j][i] + 1) / 4096.0) * 10.0
-                            for i in range(number_of_steps)] for j in range(8)]
+                            for i in range(number_of_steps)] for j in range(NUM_OF_FIBERS)]
 
 # Coupling plotter
 plt_legend = []
-for fiber_index in range(8):
+for fiber_index in range(NUM_OF_FIBERS):
     plt.plot(step_vec, normalized_coupling_vec[fiber_index])
     plt_legend.append("Fiber {}".format(fiber_index + 1))
 
@@ -67,7 +70,7 @@ if (len(sys.argv) == 2):
 domain_x = [0, 2047, 0, -2048, 0]
 domain_y = [2047, 0, -2048, 0, 2047]
 
-for fiber_index in range(8):
+for fiber_index in range(NUM_OF_FIBERS):
     plt.figure()
     plt.title("Fiber {}".format(fiber_index + 1))
     plt.plot(domain_x, domain_y)
@@ -84,7 +87,7 @@ for fiber_index in range(8):
         plt.savefig(file_name)
 
 # Voltage plotter
-for fiber_index in range(8):
+for fiber_index in range(NUM_OF_FIBERS):
     plt.figure()
     plt.title("Fiber {}".format(fiber_index + 1))
     plt.xlabel("time [s]")
