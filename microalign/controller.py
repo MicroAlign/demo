@@ -18,8 +18,6 @@ class Controller:
     def __init__(self, num_fibers):
         self._open_serial()
         self._num_fibers = num_fibers
-        #self.__serial_obj = serial.Serial(serial_device, 115200)
-        #self.__serial_obj.timeout = 1
 
     def __del__(self):
         if self.__serial_obj is not None:
@@ -28,13 +26,11 @@ class Controller:
     def _open_serial(self):
         self.__serial_obj = None
         for port in serial.tools.list_ports.comports():
-            #print(port.device)
             try:
                 serial_obj = serial.Serial(port.device, 115200)
                 serial_obj.timeout = 1
                 serial_obj.write(bytes(IDN_STRING, 'utf-8'))
                 ans = serial_obj.readline()
-                #print(ans)
                 if ans.decode('utf-8') == "STOPPED\n":
                     print("Warning: Device found in algorithm-running state.");
                     serial_obj.write(bytes(IDN_STRING, 'utf-8'))
@@ -45,7 +41,6 @@ class Controller:
                     return
             except Exception as e:
                 print("Device not found or resource busy")
-                #raise(e)
         if self.__serial_obj is None:
             raise(ValueError("Could not find MicroAlign Controller connected over serial"))
         
@@ -152,7 +147,6 @@ class Controller:
             reading_split = parse('{}C{}', coupling_split[reading])
             fiber_index = int(reading_split[0])
             coupling_value = int(reading_split[1])
-            #print("index: ", fiber_index, " coupling: ", coupling_value)
             coupling_vec[fiber_index -
                                 1] = coupling_value
             
@@ -166,8 +160,6 @@ class Controller:
             fiber_index = int(reading_split[0])
             bias_value_left = int(reading_split[1])
             bias_value_right = int(reading_split[2])
-            #print("index: {}, bias left: {}, bias right: {}".format(
-            #    fiber_index, bias_value_left, bias_value_right))
             bias_left_vec[fiber_index -
                                     1] = bias_value_left
             bias_right_vec[fiber_index -

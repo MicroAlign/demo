@@ -87,7 +87,7 @@ for step in range(number_of_steps):
     coupling_vec_dB = 10* np.log10(coupling_vec/PD_VOLTAGE_TO_MILLIWATTS_FACTOR)
     coupling_vec_dB[coupling_vec_dB == -np.inf] = -35
     couplings[:,step] = coupling_vec_dB
-    #print(couplings)
+
     for i in range(NUM_OF_FIBERS):
         power_lines[i].set_ydata(couplings[i,:])
         power_ax[i].set_ylim(np.nanmin(couplings[i,:])-0.5, np.nanmax(couplings[i,:])+0.5)
@@ -95,7 +95,6 @@ for step in range(number_of_steps):
             power_ax[i].set_xlim(0, step)
 
         position_lines[i].set_offsets(np.c_[x_position_vec[i],y_position_vec[i]])
-        #position_lines[i].set_xdata(x_position_vec[i])
     power_fig.canvas.draw()
     power_fig.canvas.flush_events()
 
