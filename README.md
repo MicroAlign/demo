@@ -1,8 +1,16 @@
-# DEMO scripts
+# Setup
+Please download/clone this repository locally. Make sure you have python installed on your machine (This code is tested using python 3.9.7)
+Install the required packages by running `pip install -r requirements.txt`
 
-For testing, the following scripts are provided:
-- `py/run_algorithm.py` - performs the alignment using `MAMS`'s internal algorithm
-- `py/keep_reading.py`  - reads continuously the power from the photodiodes and prints them
-- `py/vertical_scan.py` - moves a fiber along the vertical axis and reads the coupled power
+# MicroAlign Python library
+The folder `microalign` contains a simple library for comminicating with the MicroAlign controller.
+The library is able to automatically detect the connected controller over Serial. It provides functions for communicating with the controller over Serial.
 
-Please, make sure that the serial port in use is correctly set in each script (e.g. `COM...` on Windows, `/dev/ttyUSB...` on Linux, `/dev/cu.usbserial-...` on MacOS).
+# Demonstration scripts
+For demonstration purposes, the following scripts are provided:
+- `run_algorithm.py` - performs the alignment of the optical fibers using the algorithm implemented on the controller. Live feedback of the coupled power and fiber positions is provided.
+- `keep_reading.py`  - Continually reads the optical power of all connected fibers and plots the result. Can be used during the landing of the fibers.
+- `vertical_scan.py` - moves a single fiber along the vertical axis and reads the coupled power. Finally plots the result
+- `horizontal_scan.py` - Same as `vertical_scan.py`, but moves along the horizontal axis.
+- `diagonal_scan.py` - Same as `vertical_scan.py`, but moves along a diagonal axis.
+
